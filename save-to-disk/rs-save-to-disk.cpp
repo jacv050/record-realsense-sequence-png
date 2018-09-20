@@ -88,7 +88,7 @@ int main(int argc, char * argv[]) try
 
     int expected_width = 640;//640 
     int expected_height = 360;//480 360
-    int expected_fps = 15;//60 30 15 6
+    int expected_fps = 6;//60 30 15 6
 
     for(auto profile : depth_sensor.get_stream_profiles()){
         int width, height;
@@ -149,7 +149,7 @@ int main(int argc, char * argv[]) try
 
     double time_counter = 0;
     clock_t first_time = clock();
-    int NUM_SECONDS = 10;
+    int NUM_SECONDS = 20;
 
     usleep(1000);
     std::cout << "RECORDING..." << std::endl;
