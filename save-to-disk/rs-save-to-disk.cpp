@@ -31,6 +31,8 @@ rs2::syncer sync_streams(CAPACITY);
 // Declare RealSense pipeline, encapsulating the actual device and sensors
 rs2::pipeline g_pipe;
 
+std::string scene;
+
 void thread()
 {
     // Declare depth colorizer for pretty visualization of depth data
@@ -65,9 +67,9 @@ void thread()
                 std::stringstream png_file;
 
                 if(vf.get_profile().stream_name().find("Depth")!=std::string::npos)
-                    png_file << "Depth/";
+                    png_file << scene << "/Depth/";
                 else if(vf.get_profile().stream_name().find("Color")!=std::string::npos)
-                    png_file << "Color/";
+                    png_file << scene << "/Color/";
 
                 png_file << str_frame_id << ".png";
                 //png_file << "frame-" << vf.get_profile().stream_name()  << "-" << str_frame_id << ".png";
@@ -88,6 +90,22 @@ int main(int argc, char * argv[]) try
     // Start streaming with default recommended configuration
     //rs2::pipeline_profile selection = g_pipe.start();
     //rs2::device selected_device = selection.get_device();
+
+    if(argc != 2){
+        std::cout << "Scene number parameter needed." << std::endl;
+        exit(-1);
+    }
+
+    /*std::string p_scene = argv[0];
+    if(p_scene.size() == 1)
+        scene = "00" + p_scene;
+    else if(p_scene.size() == 2)
+        scene = "0" + p_scene;
+    else
+        scene = p_scene;
+    */
+
+    scene = argv[1];
 
     rs2::context ctx;
     auto list = ctx.query_devices();
