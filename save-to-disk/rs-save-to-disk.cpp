@@ -158,7 +158,7 @@ int main(int argc, char * argv[]) try
         rs2::frameset frames = sync_streams.wait_for_frames();
         //sync_streams.poll_for_frames(&frames);
         //= g_pipe.wait_for_frames();
-        //*************g_pipe.poll_for_frames(&frames);
+        //*************g_pipe.poll_for_frames(&frames);me
 
         queue.enqueue(frames.get_depth_frame());
         queue.enqueue(frames.get_color_frame());
