@@ -56,9 +56,21 @@ void thread()
 
                 std::string str_frame_id = std::to_string(*counter);
 
+                if(str_frame_id.size() == 1)
+                    str_frame_id = "00" + str_frame_id;
+                else if(str_frame_id.size() == 2)
+                    str_frame_id = "0" + str_frame_id;
+
                 // Write images to disk
                 std::stringstream png_file;
-                png_file << "frame-" << vf.get_profile().stream_name()  << "-" << str_frame_id << ".png";
+
+                if(vf.get_profile()stream_name().find("Depth")!=std::string::npos)
+                    png_file << "Depth/";
+                else if(vf.get_profile()stream_name().find("Color")!=std::string::npos)
+                    png_file << "Color/";
+
+                png_file << str_frame_id << ".png";
+                //png_file << "frame-" << vf.get_profile().stream_name()  << "-" << str_frame_id << ".png";
                 stbi_write_png(png_file.str().c_str(), vf.get_width(), vf.get_height(),
                                vf.get_bytes_per_pixel(), vf.get_data(), vf.get_stride_in_bytes());
                 std::cout << "Saved " << png_file.str() << std::endl;
