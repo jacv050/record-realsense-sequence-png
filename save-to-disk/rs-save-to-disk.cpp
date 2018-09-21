@@ -64,9 +64,9 @@ void thread()
                 // Write images to disk
                 std::stringstream png_file;
 
-                if(vf.get_profile()stream_name().find("Depth")!=std::string::npos)
+                if(vf.get_profile().stream_name().find("Depth")!=std::string::npos)
                     png_file << "Depth/";
-                else if(vf.get_profile()stream_name().find("Color")!=std::string::npos)
+                else if(vf.get_profile().stream_name().find("Color")!=std::string::npos)
                     png_file << "Color/";
 
                 png_file << str_frame_id << ".png";
